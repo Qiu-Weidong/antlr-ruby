@@ -50,7 +50,7 @@ fileHeader(grammarFileName, ANTLRVersion) ::= <<
 
 SerializedATN(model) ::= <<
 @@serialized_atn = [<model.serialized: {s | <s>}; separator=",", wrap>]
-@@atn = ATNDeserializer.new.deserialize(@@serialized_atn);
+@@atn = ATNDeserializer.new.deserialize(@@serialized_atn)
 <!  org.antlr.v4.tool.DOTGenerator dot = new org.antlr.v4.tool.DOTGenerator(null);!>
 <!  System.out.println(dot.getDOT(_ATN.decisionToState.get(0), ruleNames, false));!>
 <!  System.out.println(dot.getDOT(_ATN.ruleToStartState[2], ruleNames, false));!>
@@ -123,7 +123,7 @@ class <lexer.name> \< <superClass; null="Lexer">
     "<lexer.grammarFileName>"
   end
 
-  def getRuleNames
+  def get_rule_names
     @@rule_names
   end
 
@@ -135,7 +135,7 @@ class <lexer.name> \< <superClass; null="Lexer">
     @@channel_names
   end
 
-  def getModeNames
+  def get_mode_names
     @@mode_names
   end
 
@@ -147,7 +147,7 @@ class <lexer.name> \< <superClass; null="Lexer">
   <atn>
 
   protected
-  @@decision_to_dfa = @@atn.get_number_of_decisions.times { |i| DFA.new(@@atn.get_decision_state(i), i) }
+  @@decision_to_dfa = (0...@@atn.get_number_of_decisions).map { |i| DFA.new(@@atn.get_decision_state(i), i) }
   @@shared_context_cache = PredictionContextCache.new
 
 end
