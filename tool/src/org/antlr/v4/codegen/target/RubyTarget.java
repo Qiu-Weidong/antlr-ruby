@@ -10,8 +10,6 @@ import java.util.Set;
 
 public class RubyTarget extends Target {
 
-	private static final ThreadLocal<STGroup> targetTemplates = new ThreadLocal<STGroup>();
-
 	protected static final HashSet<String> reservedWords = new HashSet<>(Arrays.asList(
 			"abstract", "assert", "boolean", "break", "byte", "case", "catch",
 			"char", "class", "const", "continue", "default", "do", "double", "else",
@@ -28,16 +26,10 @@ public class RubyTarget extends Target {
 
 	public RubyTarget(CodeGenerator gen) { super(gen); }
 
+	// 使用 ' ，只需要转义 ' 和 \
+
 	@Override
 	public Set<String> getReservedWords() { return reservedWords; }
-
-	@Override
-	public int getSerializedATNSegmentLimit() {
-		// 65535 is the class file format byte limit for a UTF-8 encoded string literal
-		// 3 is the maximum number of bytes it takes to encode a value in the range 0-0xFFFF
-		return 65535 / 3;
-	}
-
 
 
 	@Override
